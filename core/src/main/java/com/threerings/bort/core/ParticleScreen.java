@@ -6,7 +6,6 @@ import playn.core.CanvasImage;
 import playn.core.GroupLayer;
 import playn.core.PlayN;
 import playn.core.util.Clock;
-import tripleplay.game.UIAnimScreen;
 import tripleplay.particle.Emitter;
 import tripleplay.particle.Generator;
 import tripleplay.particle.Particles;
@@ -17,13 +16,37 @@ import tripleplay.particle.init.Color;
 import tripleplay.particle.init.Lifespan;
 import tripleplay.particle.init.Transform;
 import tripleplay.particle.init.Velocity;
+import tripleplay.ui.Background;
+import tripleplay.ui.Group;
+import tripleplay.ui.Style;
+import tripleplay.ui.layout.AxisLayout;
 import tripleplay.util.Interpolator;
 import tripleplay.util.Randoms;
 
-public class ParticleScreen extends UIAnimScreen
+public class ParticleScreen extends BortScreen
 {
-    @Override public void wasAdded () {
-        super.wasAdded();
+    @Override
+    protected String name ()
+    {
+        return "Particles";
+    }
+
+    @Override
+    protected String title ()
+    {
+        return "Particles";
+    }
+
+    @Override
+    protected Group createIface ()
+    {
+        return new Group(AxisLayout.vertical(), Style.BACKGROUND.is(Background.solid(0xFF000000)));
+    }
+
+    @Override
+    public void showTransitionCompleted ()
+    {
+        super.showTransitionCompleted();
 
         _withCircle = PlayN.graphics().createGroupLayer();
 
@@ -34,12 +57,13 @@ public class ParticleScreen extends UIAnimScreen
 
         createParticles(_particles, _rando);
 
-        anim.addAt(layer, _withCircle, 50, height()/2).then().repeat(_withCircle).
+        anim.addAt(_root.layer, _withCircle, 50, height()/2).then().repeat(_withCircle).
             tweenX(_withCircle).to(width() - 150).in(1000).easeInOut().then().
             tweenX(_withCircle).to(50).in(1000).easeInOut();
     }
 
-    protected void createParticles (Particles parts, Randoms rando) {
+    protected void createParticles (Particles parts, Randoms rando)
+    {
         CanvasImage image = PlayN.graphics().createImage(7, 7);
         image.canvas().setFillColor(0xFFFFFFFF);
         image.canvas().fillCircle(3, 3, 3);
@@ -48,14 +72,16 @@ public class ParticleScreen extends UIAnimScreen
         emitter.generator = Generator.constant(100);
         emitter.initters.add(Lifespan.constant(5));
         emitter.initters.add(Color.constant(0xFF99CCFF));
-        //emitter.initters.add(Transform.layer(emitter.layer));
+        emitter.initters.add(Transform.layer(emitter.layer));
         emitter.initters.add(Velocity.randomSquare(rando, -20, 20, -100, 0));
         emitter.effectors.add(new Gravity(30));
         emitter.effectors.add(new Move());
         emitter.effectors.add(Alpha.byAge(Interpolator.EASE_OUT, 1, 0));
     }
 
-    @Override public void paint (Clock clock) {
+    @Override
+    public void paint (Clock clock)
+    {
         super.paint(clock);
         _particles.paint(clock);
     }

@@ -4,25 +4,32 @@ import playn.core.Game;
 import playn.core.PlayN;
 import playn.core.util.Clock;
 import tripleplay.game.ScreenStack;
-import tripleplay.game.UIScreen;
 
-public class Bort extends Game.Default {
+public class Bort extends Game.Default
+{
     public static final int UPDATE_RATE = 50;
 
-    public Bort () {
+    public Bort ()
+    {
         super(UPDATE_RATE);
     }
 
-    @Override public void init () {
-        _screens.push(new ParticleScreen());
+    @Override
+    public void init ()
+    {
+        _screens.push(new MenuScreen(_screens));
     }
 
-    @Override public void update (int delta) {
+    @Override
+    public void update (int delta)
+    {
         _clock.update(delta);
         _screens.update(delta);
     }
 
-    @Override public void paint (float alpha) {
+    @Override
+    public void paint (float alpha)
+    {
         _clock.paint(alpha);
         _screens.paint(_clock);
     }
