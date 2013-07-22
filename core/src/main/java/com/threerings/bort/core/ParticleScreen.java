@@ -1,0 +1,66 @@
+package com.threerings.bort.core;
+
+import java.util.Random;
+
+import playn.core.CanvasImage;
+import playn.core.GroupLayer;
+import playn.core.PlayN;
+import playn.core.util.Clock;
+import tripleplay.game.UIAnimScreen;
+import tripleplay.particle.Emitter;
+import tripleplay.particle.Generator;
+import tripleplay.particle.Particles;
+import tripleplay.particle.effect.Alpha;
+import tripleplay.particle.effect.Gravity;
+import tripleplay.particle.effect.Move;
+import tripleplay.particle.init.Color;
+import tripleplay.particle.init.Lifespan;
+import tripleplay.particle.init.Transform;
+import tripleplay.particle.init.Velocity;
+import tripleplay.util.Interpolator;
+import tripleplay.util.Randoms;
+
+public class ParticleScreen extends UIAnimScreen
+{
+    @Override public void wasAdded () {
+        super.wasAdded();
+
+        _withCircle = PlayN.graphics().createGroupLayer();
+
+        CanvasImage image = PlayN.graphics().createImage(30, 30);
+        image.canvas().setFillColor(0xFFFFFF00);
+        image.canvas().fillCircle(15, 15, 15);
+        _withCircle.add(PlayN.graphics().createImageLayer(image));
+
+        createParticles(_particles, _rando);
+
+        anim.addAt(layer, _withCircle, 50, height()/2).then().repeat(_withCircle).
+            tweenX(_withCircle).to(width() - 150).in(1000).easeInOut().then().
+            tweenX(_withCircle).to(50).in(1000).easeInOut();
+    }
+
+    protected void createParticles (Particles parts, Randoms rando) {
+        CanvasImage image = PlayN.graphics().createImage(7, 7);
+        image.canvas().setFillColor(0xFFFFFFFF);
+        image.canvas().fillCircle(3, 3, 3);
+
+        Emitter emitter = parts.createEmitter(5000, image, _withCircle);
+        emitter.generator = Generator.constant(100);
+        emitter.initters.add(Lifespan.constant(5));
+        emitter.initters.add(Color.constant(0xFF99CCFF));
+        //emitter.initters.add(Transform.layer(emitter.layer));
+        emitter.initters.add(Velocity.randomSquare(rando, -20, 20, -100, 0));
+        emitter.effectors.add(new Gravity(30));
+        emitter.effectors.add(new Move());
+        emitter.effectors.add(Alpha.byAge(Interpolator.EASE_OUT, 1, 0));
+    }
+
+    @Override public void paint (Clock clock) {
+        super.paint(clock);
+        _particles.paint(clock);
+    }
+
+    protected GroupLayer _withCircle;
+    protected final Particles _particles = new Particles();
+    protected final Randoms _rando = Randoms.with(new Random());
+}

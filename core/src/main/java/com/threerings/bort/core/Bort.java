@@ -7,9 +7,6 @@ import tripleplay.game.ScreenStack;
 import tripleplay.game.UIScreen;
 
 public class Bort extends Game.Default {
-    /** Args from the Java bootstrap class. */
-    public static String[] mainArgs = {};
-
     public static final int UPDATE_RATE = 50;
 
     public Bort () {
@@ -17,9 +14,7 @@ public class Bort extends Game.Default {
     }
 
     @Override public void init () {
-        _screens.push(new UIScreen() {
-
-        });
+        _screens.push(new ParticleScreen());
     }
 
     @Override public void update (int delta) {
