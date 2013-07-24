@@ -35,6 +35,14 @@
       <artifactId>playn-java</artifactId>
       <version>${playn.version}</version>
     </dependency>
+
+    <dependency>
+       <groupId>com.threerings</groupId>
+       <artifactId>tripleplay-java</artifactId>
+       <version>${playn.version}</version>
+       <type>jar</type>
+       <scope>compile</scope>
+    </dependency>
   </dependencies>
 
   <build>
