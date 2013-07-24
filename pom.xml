@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.googlecode.playn</groupId>
     <artifactId>playn-project</artifactId>
-    <version>1.7.2</version>
+    <version>1.8-SNAPSHOT</version>
   </parent>
 
   <groupId>com.threerings.bort</groupId>
@@ -14,7 +14,7 @@
   <name>Bort Metaproject</name>
 
   <properties>
-    <playn.version>1.7.2</playn.version>
+    <playn.version>1.8-SNAPSHOT</playn.version>
   </properties>
 
   <dependencies>
