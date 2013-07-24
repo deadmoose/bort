@@ -12,12 +12,12 @@ import tripleplay.ui.layout.AxisLayout;
 
 public class MenuScreen extends UIScreen
 {
-
     public MenuScreen (ScreenStack stack)
     {
         _stack = stack;
         _screens = new BortScreen[] {
             new ParticleScreen(),
+            new LoginScreen(),
         };
     }
 
