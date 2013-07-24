@@ -27,6 +27,9 @@ import tripleplay.ui.layout.AxisLayout;
 import tripleplay.util.Interpolator;
 import tripleplay.util.Randoms;
 
+/**
+ * Particles on a layer that gets moved around.
+ */
 public class ParticleScreen extends BortScreen
 {
     @Override
