@@ -39,12 +39,6 @@ public class ParticleScreen extends BortScreen
     }
 
     @Override
-    protected String title ()
-    {
-        return "Particles";
-    }
-
-    @Override
     protected Group createIface ()
     {
         return new Group(AxisLayout.vertical(), Style.BACKGROUND.is(Background.solid(0xFF000000)));

@@ -30,11 +30,9 @@ public abstract class BortScreen extends UIAnimScreen
         Background bg = Background.solid(0xFFCC99FF).inset(0, 0, 5, 0);
         _root.add(new Group(AxisLayout.horizontal(), Style.HALIGN.left, Style.BACKGROUND.is(bg)).add(
                       this.back = new Button("Back"),
-                      new Label(title()).addStyles(Style.FONT.is(TITLE_FONT), Style.HALIGN.center).
+                      new Label(name()).addStyles(Style.FONT.is(TITLE_FONT), Style.HALIGN.center).
                       setConstraint(AxisLayout.stretched())));
-        if (subtitle() != null) _root.add(new Label(subtitle()));
-        Group iface = createIface();
-        if (iface != null) _root.add(iface.setConstraint(AxisLayout.stretched()));
+        _root.add(createIface().setConstraint(AxisLayout.stretched()));
     }
 
     @Override
@@ -47,12 +45,6 @@ public abstract class BortScreen extends UIAnimScreen
 
     /** The label to use on the button that displays this demo. */
     protected abstract String name ();
-
-    /** Returns the title of this demo. */
-    protected abstract String title ();
-
-    /** Returns an explanatory subtitle for this demo, or null. */
-    protected String subtitle () { return null; }
 
     /** Override this method and return a group that contains your main UI, or null. */
     protected abstract Group createIface ();
