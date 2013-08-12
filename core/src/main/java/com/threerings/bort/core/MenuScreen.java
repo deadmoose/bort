@@ -18,6 +18,7 @@ public class MenuScreen extends UIScreen
         _screens = new BortScreen[] {
             new ParticleScreen(),
             new LoginScreen(),
+            new TintScreen(),
         };
     }
 
