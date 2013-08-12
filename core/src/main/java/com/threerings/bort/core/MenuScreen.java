@@ -19,6 +19,7 @@ public class MenuScreen extends UIScreen
             new ParticleScreen(),
             new LoginScreen(),
             new TintScreen(),
+            new IntelBugScreen(),
         };
     }
 
