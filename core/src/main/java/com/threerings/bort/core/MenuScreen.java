@@ -17,7 +17,6 @@ public class MenuScreen extends UIScreen
         _stack = stack;
         _screens = new BortScreen[] {
             new ParticleScreen(),
-            new LoginScreen(),
             new TintScreen(),
             new IntelBugScreen(),
         };
