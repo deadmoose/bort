@@ -20,6 +20,7 @@ public class MenuScreen extends UIScreen
             new TintScreen(),
             new IntelBugScreen(),
             new ScrollerScreen(),
+            new FieldScreen(),
         };
     }
 
