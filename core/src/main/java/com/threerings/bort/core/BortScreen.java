@@ -21,9 +21,9 @@ public abstract class BortScreen extends UIAnimScreen
     public Button back;
 
     @Override
-    public void wasAdded ()
+    public void wasShown ()
     {
-        super.wasAdded();
+        super.wasShown();
         _root = iface.createRoot(AxisLayout.vertical().gap(0).offStretch(), stylesheet(), layer);
         _root.addStyles(Style.BACKGROUND.is(background()), Style.VALIGN.top);
         _root.setSize(width(), height());
@@ -36,9 +36,9 @@ public abstract class BortScreen extends UIAnimScreen
     }
 
     @Override
-    public void wasRemoved ()
+    public void wasHidden ()
     {
-        super.wasRemoved();
+        super.wasHidden();
         iface.destroyRoot(_root);
         while (layer.size() > 0) layer.get(0).destroy();
     }
