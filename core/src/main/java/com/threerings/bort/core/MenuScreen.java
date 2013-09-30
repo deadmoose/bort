@@ -21,6 +21,7 @@ public class MenuScreen extends UIScreen
             new IntelBugScreen(),
             new ScrollerScreen(),
             new FieldScreen(),
+            new JsonScreen(),
         };
     }
 
