@@ -20,9 +20,10 @@ public class JsonScreen extends BortScreen
         Group group = new Group(AxisLayout.vertical());
 
         try {
+            String str = PlayN.assets().getTextSync("flump/library.json");
             for (int ii = 0; ii < 10; ii++) {
                 long start = System.currentTimeMillis();
-                PlayN.json().parse(PlayN.assets().getTextSync("flump/library.json"));
+                PlayN.json().parse(str);
                 long end = System.currentTimeMillis();
                 group.add(new Label("Parsed in: " + (end - start)/1000f));
             }
